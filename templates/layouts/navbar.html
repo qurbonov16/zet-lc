@@ -1,0 +1,72 @@
+{% load static %}
+{% load i18n %}
+
+
+
+<!-- Navbar -->
+<main>
+    {% if user.is_authenticated %}
+    {#        AGAR USER TEACHER YOKI SUPERUSER BOSA       #}
+    {% if user.is_superuser %}
+        <nav>
+            <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+            <div class="navigation">
+                <ul>
+                    <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                    <li><a href="">{% trans 'Vazifa Berish' %}</a></li>
+                    <li><a href="{% url 'blog' %}">'Kurslar'</a></li>
+                    <li><a href="{% url 'logout' %}">'Chiqish'</a></li>
+                </ul>
+
+                <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+            </div>
+        </nav>
+
+        {#            AGAR USER STUDENT BOSA         #}
+
+    {% else %}
+        <nav>
+            <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+
+            <div class="navigation">
+                <ul>
+                    <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                    <li><a href="">{% trans 'Vazifalarim' %}</a></li>
+                    <li><a href="{% url 'blog' %}">{% trans 'Kurslar' %}</a></li>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="{% trans 'Chiqish' %}">
+                    </form>
+
+                </ul>
+                <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+            </div>
+        </nav>
+    {% endif %}
+
+
+
+    {#        REGISTER QMAGAN USER    #}
+{% else %}
+    <nav>
+        <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+
+        <div class="navigation">
+            <ul>
+                <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                <li><a href="{% url 'contact' %}">{% trans 'Aloqa' %}</a></li>
+                <li><a href="{% url 'registration' %}">{% trans 'Kirish' %}</a></li>
+                <li><a href="{% url 'blog' %}">{% trans 'Kurslar' %}</a></li>
+            </ul>
+
+            <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+        </div>
+    </nav>
+{% endif %}
+</main>

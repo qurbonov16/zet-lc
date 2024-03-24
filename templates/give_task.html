@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/new.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+
+    <h1 style="height: 100px"></h1>
+
+
+
+
+    {% if request.user.is_superuser == True or request.user.is_teacher == True %}
+        <div class="form">
+            <form action="{% url 'tasks' %}" method="post" enctype="multipart/form-data">
+                <h4>Vazifa Berish</h4>
+                <p>Bu yerda siz o'quvchilar uchun vazifa yaratishining mumkin.</p>
+
+                {% csrf_token %}
+                {{ forms }}
+
+                <button type="submit">Send</button>
+
+            </form>
+        </div>
+    {% else %}
+
+
+        {% if tasks == None or tasks == Null %}
+            <h1>Senda bratishka hech qanday vazifa yoq, damingni ol blyat !!</h1>
+        {% else %}
+            {% for i in tasks %}
+                <h2>Salom {{ i.student }}</h2>
+                <p>Sen qilishing kerak bo'lgan ish: {{ i.description }} </p>
+                <p>Sening Leveling: {{ i.level.level_name }}</p>
+
+                <video width="320" height="240" controls>
+                    <source src="{{ i.video.url }}">
+                </video>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endif %}
+
+
+{% endblock %}

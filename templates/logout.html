@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/new.css' %}">
+    <style>
+        section {
+            padding-top: 100px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+    <section>
+        <h1>{% trans 'Rostanham chqshni hohlayszmi?' %}</h1>
+        <form action="{% url 'logout_confirm' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" name="confirm" value="{% trans 'Ha' %}">
+            <input type="submit" name="confirm" value="{% trans "Yo'q" %}">
+        </form>
+    </section>
+{% endblock %}
+
+
