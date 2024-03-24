@@ -8,6 +8,40 @@
         section {
             padding-top: 100px;
         }
+
+        h1 {
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .forma-chqsh {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forma-chqsh input {
+            width: 8%;
+            height: 8vh;
+            margin: 20px 20px;
+            background-color: #fdc93b;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .forma-chqsh input:hover {
+            background-color: darkblue;
+            color: #fdc93b;
+            transform: scale(1.1);
+        }
+
+
     </style>
 {% endblock %}
 
@@ -15,11 +49,11 @@
 {% block content %}
 
     <section>
-        <h1>{% trans 'Rostanham chqshni hohlayszmi?' %}</h1>
-        <form action="{% url 'logout_confirm' %}" method="POST">
+        <h1>{% trans 'Rostanham Chiqishni Istaysizmi ?' %}</h1>
+        <form class="forma-chqsh" action="{% url 'logout_confirm' %}" method="POST">
             {% csrf_token %}
-            <input type="submit" name="confirm" value="{% trans 'Ha' %}">
-            <input type="submit" name="confirm" value="{% trans "Yo'q" %}">
+            <input type="submit" name="confirm" value="Ha">
+            <input type="submit" name="confirm" value="Yo'q">
         </form>
     </section>
 {% endblock %}

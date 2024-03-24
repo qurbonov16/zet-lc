@@ -1,31 +1,132 @@
 {% load static %}
 {% load i18n %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'main/css/house.css' %}">
 
+    <style>
+        nav {
+            position: fixed;
+            width: 100%;
+            background-color: #fff;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1vw 8vw;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+        }
 
-<!-- Navbar -->
-<main>
+        nav img {
+            width: 100px;
+            cursor: pointer;
+        }
+
+        nav .navigation {
+            display: flex;
+        }
+
+        #menu-img {
+            width: 60px;
+            height: 60px;
+            display: none;
+        }
+
+        #menu-close {
+            display: none;
+        }
+
+        nav .navigation ul {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        nav .navigation ul li {
+            list-style: none;
+            margin-left: 30px;
+        }
+
+        nav .navigation ul li a {
+            text-decoration: none;
+            color: rgb(21, 21, 100);
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        nav .navigation ul li a:hover {
+            color: #fdc93b;
+        }
+
+        .chqsh {
+            background-color: red;
+            color: beige;
+            margin-left: 2vw;
+            width: 100%;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chqsh:hover {
+            background-color: #fdc93b;
+            color: black;
+            transform: scale(1.1);
+        }
+    </style>
+{% endblock %}
+
+{% block navbar %}
     {% if user.is_authenticated %}
-    {#        AGAR USER TEACHER YOKI SUPERUSER BOSA       #}
-    {% if user.is_superuser %}
-        <nav>
-            <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
-            <div class="navigation">
-                <ul>
-                    <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
-                    <li><a href="">{% trans 'Vazifa Berish' %}</a></li>
-                    <li><a href="{% url 'blog' %}">'Kurslar'</a></li>
-                    <li><a href="{% url 'logout' %}">'Chiqish'</a></li>
-                </ul>
+        {#        AGAR USER TEACHER YOKI SUPERUSER BOSA       #}
+        {% if user.is_superuser %}
+            <nav>
+                <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+                <div class="navigation">
+                    <ul>
+                        <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                        <li><a href="{% url 'tasks' %}">{% trans 'Vazifa Berish' %}</a></li>
+                        <li><a href="{% url 'blog' %}">Kurslar</a></li>
+                        <li><a href="{% url 'logout' %}">Chiqish</a></li>
+                    </ul>
 
-                <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
-            </div>
-        </nav>
+                    <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+                </div>
+            </nav>
 
-        {#            AGAR USER STUDENT BOSA         #}
 
+            {#  AGAR USER STUDENT BOSA         #}
+        {% else %}
+            <nav>
+                <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+
+                <div class="navigation">
+                    <ul>
+                        <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                        <li><a href="{% url 'tasks' %}">{% trans 'Vazifalarim' %}</a></li>
+                        <li><a href="{% url 'blog' %}">{% trans 'Kurslar' %}</a></li>
+                        <form action="{% url 'logout' %}" method="POST" style="">
+                            {% csrf_token %}
+                            <input class="chqsh" style="" type="submit" value="{% trans 'Chiqish' %}">
+                        </form>
+
+                    </ul>
+                    <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+                </div>
+            </nav>
+        {% endif %}
+
+
+
+        {#        REGISTER QMAGAN USER    #}
     {% else %}
         <nav>
             <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
@@ -35,38 +136,16 @@
                     <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
-                    <li><a href="">{% trans 'Vazifalarim' %}</a></li>
+                    <li><a href="{% url 'contact' %}">{% trans 'Aloqa' %}</a></li>
+                    <li><a href="{% url 'registration' %}">{% trans 'Kirish' %}</a></li>
                     <li><a href="{% url 'blog' %}">{% trans 'Kurslar' %}</a></li>
-                    <form action="{% url 'logout' %}" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="{% trans 'Chiqish' %}">
-                    </form>
-
                 </ul>
+
                 <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
             </div>
         </nav>
     {% endif %}
 
+{% endblock %}
+<!-- Navbar -->
 
-
-    {#        REGISTER QMAGAN USER    #}
-{% else %}
-    <nav>
-        <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
-
-        <div class="navigation">
-            <ul>
-                <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
-                <li><a href="{% url 'contact' %}">{% trans 'Aloqa' %}</a></li>
-                <li><a href="{% url 'registration' %}">{% trans 'Kirish' %}</a></li>
-                <li><a href="{% url 'blog' %}">{% trans 'Kurslar' %}</a></li>
-            </ul>
-
-            <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
-        </div>
-    </nav>
-{% endif %}
-</main>

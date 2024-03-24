@@ -9,6 +9,7 @@ from .models import *
 
 admin.site.register(TeacherModel)
 admin.site.register(StudentModel)
+admin.site.register(BitirganStudent)
 
 
 class LevelAdmin(admin.ModelAdmin):

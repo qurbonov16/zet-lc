@@ -15,7 +15,7 @@ class LevelModel(models.Model):
         ('IELTS', 'IELTS')
     ]
     image = models.ImageField(upload_to='media')
-    text = models.TextField(max_length=500, help_text=_('Text Kiriting'))
+    text = models.TextField(max_length=500)
     level_name = models.CharField(max_length=35, choices=LEVEL_CHOICES)
     price_level = models.DecimalField(max_digits=6, decimal_places=2)
 
@@ -50,13 +50,43 @@ class StudentModel(models.Model):
         return f'{self.student.full_name}    {self.student.username}'
 
 
+class BitirganStudent(models.Model):
+    ielts_choice = [
+        ('6.5', '6.5'),
+        ('7', '7'),
+        ('7.5', '7.5'),
+        ('8', '8'),
+        ('8.5', '8.5'),
+        ('9', '9'),
+    ]
+    full_name = models.CharField(max_length=50)
+    description = models.TextField()
+    end_of_date = models.DateField()
+    image = models.ImageField(upload_to='media')
+    ielts = models.CharField(max_length=3, choices=ielts_choice)
+
+    def __str__(self):
+        return self.full_name
+
+    class Meta:
+        verbose_name = 'Bitiruvchi'
+        verbose_name_plural = 'Bitiruvchilar'
+
+
 class task_for_stuent(models.Model):
     teacher = models.OneToOneField(TeacherModel, on_delete=models.SET_NULL, null=True, blank=True)
     student = models.ForeignKey(StudentModel, on_delete=models.CASCADE)
     level = models.ForeignKey(LevelModel, on_delete=models.CASCADE)
     video = models.FileField(upload_to='videos', validators=[
         FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
-    description = models.TextField(max_length=500, help_text=_("O'quvchi nima qilishi kerakligini yozing"))
+    description = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.level.level_name + ' ' + self.student.student.full_name
+
+    class Meta:
+        verbose_name = 'Task'
+        verbose_name_plural = 'Tasks'
 
 # class Student(models.Model):
 #     GENDER_CHOICES = [

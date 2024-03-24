@@ -54,3 +54,8 @@ def give_task(request):
         print(tasks)
 
         return render(request, 'give_task.html', {'tasks': tasks})
+
+
+def btst_view(request):
+    bts = BitirganStudent.objects.all()
+    return render(request, 'home.html', {'bts': bts})

@@ -7,5 +7,6 @@ urlpatterns = [
     path('contact/', contact_view, name='contact'),
     path('course-detail/<int:id>/', course_dt_view, name='course-dt'),
     path('blog/', blog_view, name='blog'),
-    path('tasks/', give_task, name='tasks')
+    path('tasks/', give_task, name='tasks'),
+    path('bts/', btst_view, name='bts'),
 ]

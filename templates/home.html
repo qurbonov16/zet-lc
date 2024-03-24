@@ -33,7 +33,14 @@
         .fea-base {
             background-image: linear-gradient(145deg, var(--primary), var(--secondary));
         }
-        
+
+        #course .courses {
+            text-align: start;
+            background: gray;
+            height: 100%;
+            position: relative;
+        }
+
 
     </style>
 {% endblock %}
@@ -50,7 +57,7 @@
             <a href="{% url 'about' %}" class="blue">{% trans "Ko'roq Bilish" %}</a>
             <a href="{% url 'blog' %}" class="yellow">{% trans "Kurslarni Ko'rish" %}</a>
 
-                
+
         </div>
     </section>
 
@@ -94,7 +101,7 @@
 
         <div class="course-box">
             {% for course in courses %}
-                <div class="courses">
+                <div class="courses" style="background-color: #95D4E8">
                     <img src="{{ course.imageURL }}" alt="">
 
                     <div class="details">
@@ -126,33 +133,33 @@
     <!-- Profiles -->
 
     <section id="teachers">
-        <h1>{% trans "Bizning O'qituvchilarimiz" %}</h1>
+        <h1>Kursimizni Bitirgan Mashhur Talabalarimiz </h1>
         <p>{% blocktrans %} Malakali ustozlar tomonidan individual tarzda o'qitlasiz va sifatga kafolat
             beramiz {% endblocktrans %}</p>
 
 
         <div class="expert-box">
-            {#            {% for teach in teachers %}#}
-            {#                <div class="profile">#}
-            {##}
-            {#                    <img src="{{ teach.imageURL }}" alt="" class="teacher-photo img-img">#}
-            {#                    <div class="d-column">#}
-            {#                        <div class="">#}
-            {#                            <h6>{{ teach.full_name }}</h6>#}
-            {#                            <p>{{ teach.description }}</p>#}
-            {#                        </div>#}
-            {##}
-            {#                        <div class="pro-links">#}
-            {#                            <i class="fab fa-facebook"></i>#}
-            {#                            <i class="fab fa-instagram"></i>#}
-            {#                            <i class="fab fa-linkedin-in"></i>#}
-            {#                        </div>#}
-            {#                    </div>#}
-            {##}
-            {##}
-            {#                </div>#}
-            {##}
-            {#            {% endfor %}#}
+            {% for b in bts %}
+                <div class="profile">
+
+                    <img src="{{ b.image }}" alt="" class="teacher-photo img-img">
+                    <div class="d-column">
+                        <div class="">
+                            <h6>{{ b.full_name }}</h6>
+                            <p>{{ b.description }}</p>
+                        </div>
+
+                        <div class="pro-links">
+                            <i class="fab fa-facebook"></i>
+                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
         </div>
 
     </section>

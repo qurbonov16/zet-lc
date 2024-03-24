@@ -37,7 +37,7 @@
 
             {% for work in works %}
                 <hr>
-                <a href="">{{ work.level_name }}</a>
+                <a href="{% url 'course-dt' work.id %}">{{ work.level_name }}</a>
             {% endfor %}
         </div>
     </section>

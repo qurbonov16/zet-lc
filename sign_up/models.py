@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser):
-    full_name = models.CharField(max_length=100, help_text=_("To'liq ism kiriting "))
+    full_name = models.CharField(max_length=100)
     age = models.PositiveIntegerField(default=9, null=True, blank=True)
     phone_number = models.CharField(max_length=13, null=True, blank=True)
     # username =

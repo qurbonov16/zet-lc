@@ -63,7 +63,7 @@ def logout_confirm(request):
         if request.POST.get('confirm') == 'Ha':
             # Perform logout functionality here
             logout(request)
-            return redirect('registration')  # Redirect to home page after logout
+            return redirect('login')  # Redirect to home page after logout
         elif request.POST.get('confirm') == 'Yoq':
             return redirect('home')  # Redirect to home page if user chooses not to logout
     return redirect('home')  # Redirect to home page if not a POST request or invalid input

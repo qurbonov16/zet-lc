@@ -12,6 +12,11 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = task_for_stuent
         fields = ['student', 'level', 'video', 'description']
+        widgets = {
+            'level': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Level Tanlang'}),
+            'video': forms.FileInput(attrs={'class': 'form', 'placeholder': 'Video Tanglang'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': "Student nima qilishi kerakligini ayting"})
+        }
 
 
     # def validate_student(self):
