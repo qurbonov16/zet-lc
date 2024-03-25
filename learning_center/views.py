@@ -5,10 +5,12 @@ from .forms import TaskForm
 
 def home_view(request):
     # teachers = TeacherModel.objects.all()/
+    bts = BitirganStudent.objects.all()
     courses = LevelModel.objects.all()
     return render(request, 'home.html', {
-        'courses': courses}
-                  )
+        'courses': courses,
+        'bts': bts}
+                     )
 
 
 def about_view(request):
@@ -56,6 +58,3 @@ def give_task(request):
         return render(request, 'give_task.html', {'tasks': tasks})
 
 
-def btst_view(request):
-    bts = BitirganStudent.objects.all()
-    return render(request, 'home.html', {'bts': bts})

@@ -64,6 +64,8 @@ class BitirganStudent(models.Model):
     end_of_date = models.DateField()
     image = models.ImageField(upload_to='media')
     ielts = models.CharField(max_length=3, choices=ielts_choice)
+    insta_url = models.URLField()
+    face_url = models.URLField()
 
     def __str__(self):
         return self.full_name
@@ -71,6 +73,15 @@ class BitirganStudent(models.Model):
     class Meta:
         verbose_name = 'Bitiruvchi'
         verbose_name_plural = 'Bitiruvchilar'
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+
+        return url
 
 
 class task_for_stuent(models.Model):

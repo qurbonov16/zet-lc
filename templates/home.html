@@ -140,19 +140,19 @@
 
         <div class="expert-box">
             {% for b in bts %}
-                <div class="profile">
+                <div class="profile" style="height: 700px; width: 100%;">
 
-                    <img src="{{ b.image }}" alt="" class="teacher-photo img-img">
+                    <img src="{{ b.imageURL }}" alt="" style="width: 90%" class="teacher-photo img-img">
                     <div class="d-column">
                         <div class="">
                             <h6>{{ b.full_name }}</h6>
-                            <p>{{ b.description }}</p>
+                            <p>Qo'lga Kiritgan IELTS:  {{ b.ielts }}</p>
+                            <p>{{ b.description  }}</p>
                         </div>
 
                         <div class="pro-links">
-                            <i class="fab fa-facebook"></i>
-                            <i class="fab fa-instagram"></i>
-                            <i class="fab fa-linkedin-in"></i>
+                            <a href=" {{ b.insta_url }}"><i class="fab fa-instagram"></i></a>
+                            <a href=" {{ b.face_url }}"><i class="fab fa-facebook"></i></a>
                         </div>
                     </div>
 
