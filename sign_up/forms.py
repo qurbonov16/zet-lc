@@ -33,3 +33,22 @@ class Signup_form(forms.ModelForm):
         if self.cleaned_data['confirm_password'] != self.cleaned_data['password']:
             raise ValidationError( 'Parollar 1 hil emas ! Qayta urining.')
         return self.cleaned_data
+
+
+class SignTeacher(forms.ModelForm):
+    confirm_password = forms.CharField(required=True, widget=forms.PasswordInput(
+    ))
+
+    class Meta:
+        model = User
+        fields = ("full_name", 'username', 'gmail', 'is_teacher', 'password', 'confirm_password')
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            'email': forms.EmailInput(attrs={'class': 'email_input', 'placeholder': 'Email'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+        }
+
+    def clean_confirm_password(self):
+        if self.cleaned_data['confirm_password'] != self.cleaned_data['password']:
+            raise ValidationError( 'Parollar 1 hil emas ! Qayta urining.')
+        return self.cleaned_data

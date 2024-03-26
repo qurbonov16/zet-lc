@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 
 from learning_center.models import StudentModel
-from .forms import Signup_form, LoginForm
+from .forms import Signup_form, LoginForm, SignTeacher
 from django.contrib.auth import login, authenticate, logout
 
 from .models import CustomUser
@@ -67,3 +67,22 @@ def logout_confirm(request):
         elif request.POST.get('confirm') == 'Yoq':
             return redirect('home')  # Redirect to home page if user chooses not to logout
     return redirect('home')  # Redirect to home page if not a POST request or invalid input
+
+
+def registration_view2(request):
+    form = SignTeacher()
+    # print(form)
+    if request.method == 'POST':
+        form = SignTeacher(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            del form.cleaned_data['confirm_password']
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+
+            return redirect('login')
+
+    return render(request, 'regstr.html', context={
+        'form': form
+    })

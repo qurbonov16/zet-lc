@@ -195,7 +195,7 @@ nav .navigation ul li a:hover {
 
 #course {
     padding: 8vw 8vw 8vw 8vw;
-    text-align: center; 
+    text-align: center;
     margin-top: 50px;
 }
 
@@ -331,7 +331,7 @@ nav .navigation ul li a:hover {
 /* Teachers */
 
 #teachers {
-    padding: 8vw 8vw 8vw 8vw;
+    /*padding: 8;*/
     text-align: center;
 } 
 

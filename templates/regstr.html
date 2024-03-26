@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+    <h1></h1>
+    <h1></h1>
+    <h1>saom</h1>
+    <h1>saom</h1>
+    <div class="form">
+            <form action="{% url 'registration' %}" method="post">
+                {% csrf_token %}
+                <h3>{% trans "Yangi Account Yarating" %}</h3>
+                {{ form|crispy }}
+
+                <button class="sub" type="submit">Send</button>
+
+            </form>
+
+        </div>
+{% endblock %}
