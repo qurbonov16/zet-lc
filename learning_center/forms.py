@@ -2,11 +2,11 @@ from django import forms
 from .models import task_for_stuent, StudentModel
 from django.core.exceptions import ValidationError
 from .models import *
+
 task = task_for_stuent
 
 
 class TaskForm(forms.ModelForm):
-
     student = StudentModel()
 
     class Meta:
@@ -15,14 +15,8 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'level': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Level Tanlang'}),
             'video': forms.FileInput(attrs={'class': 'form', 'placeholder': 'Video Tanglang'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': "Student nima qilishi kerakligini ayting"})
+            'description': forms.Textarea(
+                attrs={'class': 'form-control', 'placeholder': "Student nima qilishi kerakligini ayting"})
         }
-
-
-    # def validate_student(self):
-    #     try:
-    #         x = StudentModel.objects.get(id=self.cleaned_data['student'])
-    #     except:
-    #         raise ValidationError('Xatolik, bunaqa ID boyica student yoq !')
 
 

@@ -9,7 +9,7 @@ def home_view(request):
     courses = LevelModel.objects.all()
     return render(request, 'home.html', {
         'courses': courses,
-        'bts': bts}
+        'bts': bts,}
                      )
 
 

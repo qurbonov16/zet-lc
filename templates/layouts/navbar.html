@@ -83,11 +83,12 @@
 {% block navbar %}
     {% if user.is_authenticated %}
         {#        AGAR USER TEACHER YOKI SUPERUSER BOSA       #}
-        {% if user.is_superuser or user.is_teacher %}
+        {% if user.is_teacher  %}
 
             <nav>
                 <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
                 <h3>salom {{ user.username   }}</h3>
+                <h3>sen {{ user.is_teacher }} teachersan</h3>
                 <div class="navigation">
                     <ul>
                         <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
@@ -101,6 +102,25 @@
                     <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
                 </div>
             </nav>
+        {% elif user.is_superuser %}
+             <nav>
+                <img src="{% static 'main/imgs/logo-no-background.png' %}" alt="">
+                <h3>salom {{ user.username   }}</h3>
+                <h3>sen {{ user.is_superuser }} adminsan <admin></admin></h3>
+                <div class="navigation">
+                    <ul>
+                        <i id="menu-close" class="fa-solid fa-circle-xmark"></i>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">{% trans 'Biz haqimizda' %}</a></li>
+                        <li><a href="{% url 'registr' %}">Ustoz Qo'shish</a></li>
+                        <li><a href="{% url 'blog' %}">Kurslar</a></li>
+                        <li><a href="{% url 'logout' %}">Chiqish</a></li>
+                    </ul>
+
+                    <img src="{% static 'main/imgs/burger.jpg' %}" id="menu-img" alt="">
+                </div>
+            </nav>
+
 
 
             {#  AGAR USER STUDENT BOSA         #}

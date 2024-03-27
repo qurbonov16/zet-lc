@@ -45,8 +45,7 @@
 
         main {
             display: flex;
-                {#flex-direction: column;#}
-            justify-content: center;
+        {#flex-direction: column;#} justify-content: center;
             align-items: center;
             padding: 0 50px 50px 50px;
             font-family: 'Roboto', sans-serif;
@@ -189,6 +188,7 @@
                     <div class="cost">
                         {{ course.price_level }}
                     </div>
+                
                 </div>
             {% endfor %}
 
@@ -210,21 +210,21 @@
 
 
     <main>
-    {% for b in bts %}
-        <div class="card">
-            <img src="{{ b.imageURL }}" alt="">
-            <div class="card-content">
-                <h2>
-                    {{ b.full_name }}
-                </h2>
-                <p>
-                    {{ b.description }} <br>Qo'lga Kiritgan IELTS natijasi: {{ b.ielts }}
-                </p>
+        {% for b in bts %}
+            <div class="card">
+                <img src="{{ b.imageURL }}" alt="">
+                <div class="card-content">
+                    <h2>
+                        {{ b.full_name }}
+                    </h2>
+                    <p>
+                        {{ b.description }} <br>Qo'lga Kiritgan IELTS natijasi: {{ b.ielts }}
+                    </p>
 
 
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
     </main>
 
 {% endblock %}

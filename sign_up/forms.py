@@ -1,4 +1,5 @@
 from django import forms
+from django.core import validators
 from django.core.exceptions import ValidationError
 from .models import *
 
@@ -45,10 +46,15 @@ class SignTeacher(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Username'}),
             'email': forms.EmailInput(attrs={'class': 'email_input', 'placeholder': 'Email'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+            'password': forms.PasswordInput(attrs={'placeholder': 'Password'})
         }
 
     def clean_confirm_password(self):
         if self.cleaned_data['confirm_password'] != self.cleaned_data['password']:
             raise ValidationError( 'Parollar 1 hil emas ! Qayta urining.')
         return self.cleaned_data
+
+    def is_teacher(self):
+        if self.cleaned_data["is_teacher"] == False:
+            raise ValidationError( 'ustoz emas')
+        return self.cleaned_data['is_teacher']

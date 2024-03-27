@@ -3,21 +3,85 @@
 {% load static %}
 {% load i18n %}
 
+{% block extra_css %}
+    <style>
+
+        .form {
+            background-image: url({% static 'main/imgs/white.jpg' %});
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+        }
+
+        .form input {
+            margin: 15px 0;
+            padding: 15px 10px;
+            border: 1px solid rgb(84, 40, 241);
+            outline: none;
+        }
+
+
+        .form input {
+            color: #413c3c;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .sub {
+            font-family: "Arial Black", sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            background: #1e90ff;
+            width: 100px;
+            padding: 10px;
+            border: 1px solid blue;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.1);
+            transition-duration: 0.3s;
+            transition-property: box-shadow, transform;
+        }
+
+
+        .sub:hover, .sub:focus, .sub:active {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+
+    </style>
+{% endblock %}
+
 
 {% block content %}
     <h1></h1>
     <h1></h1>
     <h1>saom</h1>
     <h1>saom</h1>
-    <div class="form">
-            <form action="{% url 'registration' %}" method="post">
-                {% csrf_token %}
-                <h3>{% trans "Yangi Account Yarating" %}</h3>
-                {{ form|crispy }}
+    <main>
+        {% if user.is_superuser %}
+            <div class="form">
+                <form action="{% url 'registr' %}" method="post">
+                    {% csrf_token %}
+                    <h3>{% trans "Yangi Account Yarating" %}</h3>
+                    {{ form|crispy }}
 
-                <button class="sub" type="submit">Send</button>
+                    <button class="sub" type="submit">Send</button>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
+
+        {% else %}
+
+            <h1 style="text-align: center; height: 105px">Bu sahifa sizdaham tez orada ishlab ketadi...</h1>
+        {% endif %}
+    </main>
 {% endblock %}

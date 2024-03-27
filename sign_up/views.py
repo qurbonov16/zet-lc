@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 
-from learning_center.models import StudentModel
+from learning_center.models import StudentModel, TeacherModel
 from .forms import Signup_form, LoginForm, SignTeacher
 from django.contrib.auth import login, authenticate, logout
 
@@ -80,6 +80,12 @@ def registration_view2(request):
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
+            print(user, user.is_teacher)
+            usr = CustomUser.objects.all()[::-1]
+            id = usr[0]
+            a1 = TeacherModel.objects.create(teacher=id)
+            print(a1, "ohirgi user ")
+
 
             return redirect('login')
 

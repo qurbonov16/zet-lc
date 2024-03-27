@@ -10,9 +10,19 @@ def validate_phone_number(value):
 
 
 def full_name(value):
-    x = value.split(" ")
-    if len(x) < 2:
-        raise ValidationError(_('The full name must be 3 words !'), code='invalid_full_name')
+    words = value.split()
+    if len(words) != 3:
+        raise ValidationError("To'liq ism 3ta so'zdan tashkil topishi kerak !")
+
+    for word in words:
+        if not word[0].isupper():
+            raise ValidationError("Har bir ismning bosh harfi kattada bo'lishi kerak !")
+
+        if len(word) < 3:
+            raise ValidationError("To'liq ism 3ta so'zdan tashkil topishi kerak !")
+
+        if len(set(word[:2].lower())) != 2:
+            raise ValidationError("Ismlarning boshidagi 2ta harfi bir-biriga o'xshamasligi kerak !")
 
 
 def address(value):
